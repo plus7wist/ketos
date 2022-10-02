@@ -94,79 +94,79 @@ macro_rules! ketos_args {
 
 #[cfg(test)]
 mod test {
-    use crate::error::Error;
+	use crate::error::Error;
 
-    #[test]
-    fn test_args() {
-        let args = [1.into(), "sup".into(), (2, 'a').into()];
+	#[test]
+	fn test_args() {
+		let args = [1.into(), "sup".into(), (2, 'a').into()];
 
-        let f = || -> Result<(), Error> {
-            let (a, b, (c, d)) = ketos_args!(&args, (i32, &str, (i32, char)));
+		let f = || -> Result<(), Error> {
+			let (a, b, (c, d)) = ketos_args!(&args, (i32, &str, (i32, char)));
 
-            assert_eq!(a, 1);
-            assert_eq!(b, "sup");
-            assert_eq!(c, 2);
-            assert_eq!(d, 'a');
+			assert_eq!(a, 1);
+			assert_eq!(b, "sup");
+			assert_eq!(c, 2);
+			assert_eq!(d, 'a');
 
-            Ok(())
-        };
+			Ok(())
+		};
 
-        f().unwrap();
-    }
+		f().unwrap();
+	}
 
-    #[test]
-    fn test_empty_args() {
-        let args = [];
+	#[test]
+	fn test_empty_args() {
+		let args = [];
 
-        let f = || -> Result<(), Error> {
-            let () = ketos_args!(&args, ());
-            ketos_args!(&args, ());
+		let f = || -> Result<(), Error> {
+			let () = ketos_args!(&args, ());
+			ketos_args!(&args, ());
 
-            Ok(())
-        };
+			Ok(())
+		};
 
-        f().unwrap();
-    }
+		f().unwrap();
+	}
 
-    #[test]
-    fn test_one_arg() {
-        let args = [1.into()];
+	#[test]
+	fn test_one_arg() {
+		let args = [1.into()];
 
-        let f = || -> Result<(), Error> {
-            let (a,) = ketos_args!(&args, (i32));
-            assert_eq!(a, 1);
+		let f = || -> Result<(), Error> {
+			let (a,) = ketos_args!(&args, (i32));
+			assert_eq!(a, 1);
 
-            let (a,) = ketos_args!(&args, [ i32 ]);
-            assert_eq!(a, Some(1));
+			let (a,) = ketos_args!(&args, [i32]);
+			assert_eq!(a, Some(1));
 
-            Ok(())
-        };
+			Ok(())
+		};
 
-        f().unwrap();
-    }
+		f().unwrap();
+	}
 
-    #[test]
-    fn test_optional_args() {
-        let args = [1.into(), 2.into(), 3.into()];
+	#[test]
+	fn test_optional_args() {
+		let args = [1.into(), 2.into(), 3.into()];
 
-        let f = || -> Result<(), Error> {
-            let (a, b, c, d) = ketos_args!(&args, (i32, i32 [ i32, i32 ]));
+		let f = || -> Result<(), Error> {
+			let (a, b, c, d) = ketos_args!(&args, (i32, i32 [ i32, i32 ]));
 
-            assert_eq!(a, 1);
-            assert_eq!(b, 2);
-            assert_eq!(c, Some(3));
-            assert_eq!(d, None);
+			assert_eq!(a, 1);
+			assert_eq!(b, 2);
+			assert_eq!(c, Some(3));
+			assert_eq!(d, None);
 
-            let (a, b, c, d) = ketos_args!(&args, [ i32, i32, i32, i32 ]);
+			let (a, b, c, d) = ketos_args!(&args, [i32, i32, i32, i32]);
 
-            assert_eq!(a, Some(1));
-            assert_eq!(b, Some(2));
-            assert_eq!(c, Some(3));
-            assert_eq!(d, None);
+			assert_eq!(a, Some(1));
+			assert_eq!(b, Some(2));
+			assert_eq!(c, Some(3));
+			assert_eq!(d, None);
 
-            Ok(())
-        };
+			Ok(())
+		};
 
-        f().unwrap();
-    }
+		f().unwrap();
+	}
 }

@@ -30,7 +30,8 @@
 #![allow(clippy::float_cmp)]
 
 #[cfg(test)]
-#[macro_use] extern crate assert_matches;
+#[macro_use]
+extern crate assert_matches;
 
 #[cfg(feature = "derive")]
 #[doc(hidden)]
@@ -38,16 +39,18 @@ pub use ketos_derive::*;
 
 pub use crate::bytecode::Code;
 pub use crate::bytes::Bytes;
-pub use crate::completion::complete_name;
 pub use crate::compile::CompileError;
+pub use crate::completion::complete_name;
 pub use crate::encode::{DecodeError, EncodeError};
 pub use crate::error::Error;
-pub use crate::exec::{Context, ExecError, panic, panic_none};
+pub use crate::exec::{panic, panic_none, Context, ExecError};
 pub use crate::function::Arity;
-pub use crate::interpreter::{Builder, Interpreter};
 pub use crate::integer::{Integer, Ratio};
+pub use crate::interpreter::{Builder, Interpreter};
 pub use crate::io::{File, GlobalIo, IoError, SharedWrite};
-pub use crate::module::{BuiltinModuleLoader, FileModuleLoader, Module, ModuleBuilder, ModuleLoader};
+pub use crate::module::{
+	BuiltinModuleLoader, FileModuleLoader, Module, ModuleBuilder, ModuleLoader,
+};
 pub use crate::name::{Name, NameStore};
 pub use crate::parser::{ParseError, ParseErrorKind};
 pub use crate::restrict::{RestrictConfig, RestrictError};
@@ -56,15 +59,18 @@ pub use crate::scope::{GlobalScope, Scope};
 pub use crate::structs::{StructDef, StructValue};
 pub use crate::trace::{clear_traceback, get_traceback, set_traceback, take_traceback, Trace};
 pub use crate::value::{ForeignValue, FromValue, FromValueRef, Value};
-#[cfg(feature = "serde")] pub use value_decode::decode_value;
-#[cfg(feature = "serde")] pub use value_encode::encode_value;
+#[cfg(feature = "serde")]
+pub use value_decode::decode_value;
+#[cfg(feature = "serde")]
+pub use value_encode::encode_value;
 
-#[macro_use] pub mod any;
+#[macro_use]
+pub mod any;
 pub mod args;
 pub mod bytecode;
 pub mod bytes;
-pub mod completion;
 pub mod compile;
+pub mod completion;
 mod const_fold;
 pub mod encode;
 pub mod error;
@@ -78,8 +84,8 @@ pub mod module;
 pub mod name;
 pub mod parser;
 pub mod pretty;
-pub mod restrict;
 pub mod rc_vec;
+pub mod restrict;
 pub mod run;
 pub mod scope;
 mod string;
@@ -87,8 +93,10 @@ pub mod string_fmt;
 pub mod structs;
 pub mod trace;
 pub mod value;
-#[cfg(feature = "serde")] pub mod value_decode;
-#[cfg(feature = "serde")] pub mod value_encode;
+#[cfg(feature = "serde")]
+pub mod value_decode;
+#[cfg(feature = "serde")]
+pub mod value_encode;
 
 mod mod_code;
 mod mod_math;
